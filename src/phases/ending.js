@@ -27,7 +27,7 @@ function showBirthdaySurprise() {
 
   const img = document.createElement('img')
   img.id = 'birthday-img'
-  img.src = '/birthday.png'
+  img.src = `${import.meta.env.BASE_URL}birthday.png`
   img.alt = ''
 
   const text = document.createElement('div')

@@ -28,7 +28,7 @@ export async function initFigurine(scene) {
   let model
   try {
     const loader = new GLTFLoader()
-    const gltf = await loader.loadAsync('/models/figurine.glb')
+    const gltf = await loader.loadAsync(`${import.meta.env.BASE_URL}models/figurine.glb`)
     model = gltf.scene
     model.scale.setScalar(0.1)
   } catch {

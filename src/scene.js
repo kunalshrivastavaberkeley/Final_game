@@ -17,7 +17,7 @@ export async function buildScene(scene) {
   const black = new THREE.MeshLambertMaterial({ color: 0x050a05 })
 
   const loader = new THREE.TextureLoader()
-  const base = '/Poliigon_ConcreteWorn_8690/2K/Poliigon_ConcreteWorn_8690'
+  const base = `${import.meta.env.BASE_URL}Poliigon_ConcreteWorn_8690/2K/Poliigon_ConcreteWorn_8690`
   const albedo    = loader.load(`${base}_BaseColor.jpg`)
   const aoMap     = loader.load(`${base}_AmbientOcclusion.jpg`)
   const normalMap = loader.load(`${base}_Normal.png`)
@@ -37,7 +37,7 @@ export async function buildScene(scene) {
     metalness: 0,
   })
 
-  const wBase = '/Poliigon_PlasterPainted_7664/2K/Poliigon_PlasterPainted_7664'
+  const wBase = `${import.meta.env.BASE_URL}Poliigon_PlasterPainted_7664/2K/Poliigon_PlasterPainted_7664`
   const wAlbedo    = loader.load(`${wBase}_BaseColor.jpg`)
   const wAo        = loader.load(`${wBase}_AmbientOcclusion.jpg`)
   const wNormal    = loader.load(`${wBase}_Normal.png`)
@@ -88,7 +88,7 @@ export async function buildScene(scene) {
 
   // ── Load table GLB ────────────────────────────────────────────
   const gltfLoader = new GLTFLoader()
-  const tableGltf = await gltfLoader.loadAsync('/models/table_with_metal_legs.glb')
+  const tableGltf = await gltfLoader.loadAsync(`${import.meta.env.BASE_URL}models/table_with_metal_legs.glb`)
   const tableTemplate = tableGltf.scene
   tableTemplate.traverse(child => {
     if (child.isMesh) {

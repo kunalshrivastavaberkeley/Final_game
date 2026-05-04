@@ -55,9 +55,9 @@ initEnding()
 
 // ── Audio load ────────────────────────────────────────────────
 await Promise.all([
-  loadAudio('fan',   '/audio/fan.wav'),
-  loadAudio('hum',   '/audio/hum.wav'),
-  loadAudio('chime', '/audio/chime.flac'),
+  loadAudio('fan',   `${import.meta.env.BASE_URL}audio/fan.wav`),
+  loadAudio('hum',   `${import.meta.env.BASE_URL}audio/hum.wav`),
+  loadAudio('chime', `${import.meta.env.BASE_URL}audio/chime.flac`),
 ])
 
 // ── Figurine ──────────────────────────────────────────────────
