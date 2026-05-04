@@ -2,8 +2,8 @@ import * as THREE from 'three'
 
 const POSITIONS = {
   terminal: {
-    position: new THREE.Vector3(0, 1.55, -5.2),
-    lookAt:   new THREE.Vector3(0, 1.35, -6.2),
+    position: new THREE.Vector3(0, 1.38, 1.5),
+    lookAt:   new THREE.Vector3(0, 1.38, -0.05),
   },
   free: {
     position: new THREE.Vector3(0, 1.65, 3.0),
@@ -39,9 +39,8 @@ function smoothstep(t) {
 
 export function initCamera(camera) {
   _camera = camera
-  const pos = POSITIONS.terminal
-  camera.position.copy(pos.position)
-  currentLookAt.copy(pos.lookAt)
+  camera.position.set(0, 1.65, 1.0)
+  currentLookAt.set(2.5, 1.38, -0.05)
   camera.lookAt(currentLookAt)
 }
 

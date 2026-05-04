@@ -7,7 +7,7 @@ let fanHandle = null
 function enter() {
   fanHandle = playLoop('fan', 0.6)
   setTimeout(() => {
-    startTransition('free', 'terminal', 2100, () => {
+    startTransition('free', 'terminal', 10000, () => {
       fadeOut(fanHandle, 1.5)
       setState('BOOT')
     })

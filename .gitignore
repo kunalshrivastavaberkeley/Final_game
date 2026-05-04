@@ -1,3 +1,14 @@
 node_modules/
 dist/
 .DS_Store
+
+# Root-level asset duplicates (runtime copies live in public/)
+Poliigon_ConcreteWorn_8690/
+Poliigon_PlasterPainted_7664/
+painted-worn-concrete-bl/
+oneshot_niko_plush_low_poly.glb
+table_with_metal_legs.glb
+"image (17).png"
+
+# Scratch files
+src/junk.js

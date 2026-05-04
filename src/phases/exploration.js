@@ -1,7 +1,7 @@
 import { registerPhase, setState, GameState } from '../state.js'
 import { startTransition } from '../camera.js'
 import { hideTerminal, showHint, clearHint } from '../terminal.js'
-import { lockPointer, unlockPointer, isNearDesk } from '../player.js'
+import { lockPointer, unlockPointer, isNearTerminal } from '../player.js'
 import { monitorMesh } from '../scene.js'
 import * as THREE from 'three'
 
@@ -9,7 +9,7 @@ function enter() {
   GameState.terminalMode = false
   hideTerminal()
 
-  if (monitorMesh) monitorMesh.material.emissive = new THREE.Color(0x000000)
+  if (monitorMesh) monitorMesh.material.emissive.set(0x000000)
 
   startTransition('terminal', 'free', 1800, () => {
     lockPointer()
@@ -19,7 +19,7 @@ function enter() {
 }
 
 function update(_delta) {
-  if (GameState.hasFigurine && isNearDesk()) {
+  if (GameState.hasFigurine && isNearTerminal()) {
     setState('RETURN')
   }
 }

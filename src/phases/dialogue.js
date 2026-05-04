@@ -24,7 +24,9 @@ async function enter() {
 function buildWrongChoices() {
   return WRONG_CHOICES.map(c => ({
     ...c,
-    locked: c.id === 'ask' && GameState.wrongChoicesSeen.size < 3,
+    locked: c.id === 'ask'
+      ? GameState.wrongChoicesSeen.size < 3
+      : GameState.wrongChoicesSeen.has(c.id),
   }))
 }
 
@@ -33,7 +35,10 @@ function showWrongChoices() {
     if (id === 'ask') {
       await handleAsk()
     } else {
+      const choice = WRONG_CHOICES.find(c => c.id === id)
       GameState.wrongChoicesSeen.add(id)
+      await printLineAsync(choice.label.replace('> ', '[WHOAMI]: '), 55)
+      await sleep(400)
       await printLineAsync(WRONG_RESPONSES[id], 55)
       await sleep(400)
       if (GameState.phase !== 'DIALOGUE') return
@@ -44,7 +49,7 @@ function showWrongChoices() {
 
 async function handleAsk() {
   if (GameState.phase !== 'DIALOGUE') return
-  await printLineAsync("[her]: what's wrong with it?", 55)
+  await printLineAsync("[WHOAMI]: what's wrong with it?", 55)
   await sleep(500)
   await printLineAsync("[child]: its not broken. i just. i cant find it. i lost it.", 60)
   await sleep(600)
@@ -67,7 +72,7 @@ function startNarrowingQuestions() {
   async function onSelect(id) {
     const q = NARROWING_QUESTIONS.find(q => q.id === id)
     answeredIds.add(id)
-    await printLineAsync(q.label.replace('> ', '[her]: '), 55)
+    await printLineAsync(q.label.replace('> ', '[WHOAMI]: '), 55)
     await sleep(400)
     if (GameState.phase !== 'DIALOGUE') return
     await printLineAsync(q.response, 60)
@@ -85,7 +90,7 @@ function startNarrowingQuestions() {
 
 async function allNarrowingDone() {
   if (GameState.phase !== 'DIALOGUE') return
-  await printLineAsync("[her]: I'll go look.", 55)
+  await printLineAsync("[WHOAMI]: I'll go look.", 55)
   await sleep(500)
   step = 3
   showChoices([{ id: 'switch', label: '[ SWITCH TO ROOM ]' }], () => {

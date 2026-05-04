@@ -30,6 +30,9 @@ export function clearOutput() {
 
 export function printLine(text, speed = 35, onDone) {
   const p = document.createElement('p')
+  if (text.startsWith('[child]:'))       p.classList.add('line-child')
+  else if (text.startsWith('[WHOAMI]:') ||
+           text.startsWith('> '))        p.classList.add('line-player')
   outputEl.appendChild(p)
   trimLines()
 

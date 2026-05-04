@@ -1,17 +1,18 @@
 import { registerPhase, setState, GameState } from '../state.js'
 import { showTerminal, printLineAsync, showNameInput, hideNameInput, setTerminalColor, hideCursor } from '../terminal.js'
-import { terminalGlow, monitorMesh } from '../scene.js'
+import { monitorMesh } from '../scene.js'
 import { playLoop, setHumHandle } from '../audio.js'
 import { sleep } from '../utils.js'
 import * as THREE from 'three'
 
+const boot_text_speed = 10
 const BOOT_LINES = [
-  { text: 'TERMINAL OS v2.31 — loading...', speed: 15 },
-  { text: 'memory check.................. OK',  speed: 15 },
-  { text: 'display subsystem............. OK',  speed: 15 },
-  { text: 'input subsystem............... OK',  speed: 15 },
-  { text: 'network....................... OFFLINE', speed: 15 },
-  { text: '>',                                  speed: 15 },
+  { text: 'TERMINAL OS v5.04 — loading...', speed: boot_text_speed },
+  { text: 'memory check.................. OK',  speed: boot_text_speed },
+  { text: 'display subsystem............. OK',  speed: boot_text_speed },
+  { text: 'input subsystem............... OK',  speed: boot_text_speed },
+  { text: 'network....................... OFFLINE', speed: boot_text_speed },
+  { text: '>',                                  speed: boot_text_speed },
 ]
 
 async function enter() {
@@ -20,8 +21,7 @@ async function enter() {
   setTerminalColor('#33ff33')
   hideCursor()
 
-  if (terminalGlow) terminalGlow.intensity = 0.4
-  if (monitorMesh)  monitorMesh.material.emissive = new THREE.Color(0x001a00)
+  if (monitorMesh) monitorMesh.material.emissive.set(0x000000)
 
   const humH = playLoop('hum', 0.08)
   setHumHandle(humH)
@@ -39,12 +39,17 @@ async function enter() {
   showNameInput(async (val) => {
     hideNameInput()
     if (GameState.phase !== 'BOOT') return
-    GameState.playerName = "I don't remember"
+    GameState.playerName = "WHOAMI"
     await printLineAsync(`> ${GameState.playerName}`, 40)
     await sleep(400)
     if (GameState.phase !== 'BOOT') return
-    await printLineAsync(`hello, i don't remember.`, 50)
+    await printLineAsync(`hello, Mrs. WHOAMI.`, 50)
+    if (GameState.phase !== 'BOOT') return
     await sleep(300)
+    if (GameState.phase !== 'BOOT') return
+    await printLineAsync(`-. . .-. -.`, 400)
+    await printLineAsync(`please wait`, 500)
+    await sleep(15000)
     setState('WAITING')
   })
 }

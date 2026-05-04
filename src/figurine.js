@@ -30,11 +30,11 @@ export async function initFigurine(scene) {
     const loader = new GLTFLoader()
     const gltf = await loader.loadAsync('/models/figurine.glb')
     model = gltf.scene
-    model.scale.setScalar(0.15)
+    model.scale.setScalar(0.1)
   } catch {
     model = makePlaceholder()
   }
-  model.position.set(0, 1.48, 7.0)
+  model.position.set(9.0, 1.43, -2.0)
   model.name = 'figurine'
   scene.add(model)
   figurineRef = model

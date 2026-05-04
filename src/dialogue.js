@@ -1,14 +1,14 @@
 export const WRONG_CHOICES = [
   { id: 'hammer',      label: '> try using a hammer'   },
   { id: 'screwdriver', label: '> try a screwdriver'    },
-  { id: 'radar',       label: '> what about a radar'   },
+  { id: 'recursion',   label: '> try recursion'  },
   { id: 'ask',         label: "> ask what's wrong",    locked: true },
 ]
 
 export const WRONG_RESPONSES = {
-  hammer:      '[child]: no that would hurt it',
-  screwdriver: '[child]: its not that kind of broken',
-  radar:       '[child]: what is a radar',
+  hammer:      '[child]: nooo, that would hurt it',
+  screwdriver: '[child]: its not that kind of broken...',
+  recursion:   '[child]: what is a recursion?',
 }
 
 export const NARROWING_QUESTIONS = [

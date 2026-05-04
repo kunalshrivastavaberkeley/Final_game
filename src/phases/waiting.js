@@ -1,7 +1,7 @@
 import { registerPhase, setState, GameState } from '../state.js'
 import { printLineAsync, showCursor } from '../terminal.js'
 
-const WAIT_DURATION = 30000 // ms — shorten to 3000 during dev
+const WAIT_DURATION = 3000 // ms — shorten to 3000 during dev
 let elapsed = 0
 let active  = false
 

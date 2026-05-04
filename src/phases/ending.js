@@ -1,6 +1,6 @@
 import { registerPhase, GameState } from '../state.js'
 import { clearOutput, printLineAsync, fadeToBlack } from '../terminal.js'
-import { humHandle, fadeOut } from '../audio.js'
+import { humHandle, fadeOut, playHappyBirthday } from '../audio.js'
 import { sleep } from '../utils.js'
 
 async function enter() {
@@ -15,6 +15,32 @@ async function enter() {
   await sleep(2500)
   fadeOut(humHandle, 3)
   fadeToBlack()
+  await sleep(3800)
+  if (GameState.phase !== 'ENDING') return
+  showBirthdaySurprise()
+  playHappyBirthday()
+}
+
+function showBirthdaySurprise() {
+  const overlay = document.createElement('div')
+  overlay.id = 'birthday-overlay'
+
+  const img = document.createElement('img')
+  img.id = 'birthday-img'
+  img.src = '/birthday.png'
+  img.alt = ''
+
+  const text = document.createElement('div')
+  text.id = 'birthday-text'
+  text.textContent = 'Happy Birthday Siwen!!!'
+
+  overlay.appendChild(img)
+  overlay.appendChild(text)
+  document.body.appendChild(overlay)
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    overlay.classList.add('visible')
+  }))
 }
 
 function exit() {}

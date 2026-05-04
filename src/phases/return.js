@@ -1,7 +1,7 @@
 import { registerPhase, setState, GameState } from '../state.js'
 import { startTransition } from '../camera.js'
 import { showTerminal, printLineAsync, hideCursor } from '../terminal.js'
-import { terminalGlow, monitorMesh } from '../scene.js'
+import { monitorMesh } from '../scene.js'
 import { sleep } from '../utils.js'
 import * as THREE from 'three'
 
@@ -9,20 +9,19 @@ async function enter() {
   GameState.terminalMode = true
   startTransition('free', 'terminal', 1800, async () => {
     showTerminal()
-    if (terminalGlow) terminalGlow.intensity = 0.4
-    if (monitorMesh)  monitorMesh.material.emissive = new THREE.Color(0x001a00)
+    if (monitorMesh) monitorMesh.material.emissive.set(0x000000)
     hideCursor()
 
     await sleep(500)
     if (GameState.phase !== 'RETURN') return
-    await printLineAsync("[her]: I found it. I'll leave it somewhere safe for you.", 55)
+    await printLineAsync("[WHOAMI]: I found it. I'll leave it somewhere safe for you.", 55)
     await sleep(600)
     await printLineAsync('[child]: wait', 55)
     await sleep(500)
     if (GameState.phase !== 'RETURN') return
     await printLineAsync('[child]: i think. i think that one is yours actually', 60)
     await sleep(800)
-    await printLineAsync('[her]: what do you mean', 55)
+    await printLineAsync('[WHOAMI]: ...', 55)
     await sleep(400)
     if (GameState.phase !== 'RETURN') return
     await printLineAsync('[child]: someone left it there for you. i just needed you to find it.', 60)

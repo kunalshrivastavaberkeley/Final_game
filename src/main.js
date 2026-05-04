@@ -1,8 +1,9 @@
 import * as THREE from 'three'
 
-import { buildScene, spotLight } from './scene.js'
+import { buildScene } from './scene.js'
+import { buildJunk, updateJunk, initPostProcessing, resizePostProcessing, renderWithDOF } from './junk.js'
 import { initCamera, updateCamera, setTransitionCallbacks } from './camera.js'
-import { initPlayer, updatePlayer } from './player.js'
+import { initPlayer, updatePlayer, getDevMode, enableDevMode } from './player.js'
 import { initFigurine, updateFigurine } from './figurine.js'
 import { GameState, setState, getUpdater } from './state.js'
 import { loadAudio, resumeContext } from './audio.js'
@@ -20,6 +21,8 @@ const canvas = document.getElementById('c')
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
@@ -27,8 +30,10 @@ scene.background = new THREE.Color(0x000000)
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
 
 // ── Scene ─────────────────────────────────────────────────────
-buildScene(scene)
+await buildScene(scene)
+buildJunk(scene)
 initCamera(camera)
+initPostProcessing(renderer, scene, camera)
 
 // Wire camera transitioning flag to GameState
 setTransitionCallbacks(
@@ -50,28 +55,40 @@ initEnding()
 
 // ── Audio load ────────────────────────────────────────────────
 await Promise.all([
-  loadAudio('fan',   '/audio/fan.mp4'),
-  loadAudio('hum',   '/audio/hum.mp4'),
-  loadAudio('chime', '/audio/chime.mp4'),
+  loadAudio('fan',   '/audio/fan.wav'),
+  loadAudio('hum',   '/audio/hum.wav'),
+  loadAudio('chime', '/audio/chime.flac'),
 ])
 
 // ── Figurine ──────────────────────────────────────────────────
 await initFigurine(scene)
 
+// ── Dev Mode ──────────────────────────────────────────────────
+// Set to true to skip boot sequence and go straight to 3D exploration
+const DEV_MODE = false
+
 // ── Start Screen ──────────────────────────────────────────────
 const startScreen = document.getElementById('start-screen')
+const DEV = DEV_MODE || new URLSearchParams(window.location.search).has('dev')
 
-startScreen.addEventListener('click', async () => {
-  await resumeContext()
+if (DEV) {
   startScreen.style.display = 'none'
-  setState('AMBIENT')
-}, { once: true })
+  enableDevMode()
+  setState('EXPLORATION')
+} else {
+  startScreen.addEventListener('click', async () => {
+    await resumeContext()
+    startScreen.style.display = 'none'
+    setState('AMBIENT')
+  }, { once: true })
+}
 
 // ── Resize ────────────────────────────────────────────────────
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
+  resizePostProcessing(window.innerWidth, window.innerHeight)
 })
 
 // ── RAF Loop ──────────────────────────────────────────────────
@@ -84,14 +101,13 @@ function loop(now) {
   lastTime = now
   time += delta
 
-  if (spotLight) spotLight.intensity = 4.0 + Math.sin(time * 0.3) * 0.05
-
   updateCamera(delta)
   updatePlayer(delta, camera)
   updateFigurine(delta)
+  updateJunk(delta)
   getUpdater()?.(delta)
 
-  renderer.render(scene, camera)
+  renderWithDOF(renderer, scene, camera)
 }
 
 requestAnimationFrame(loop)
