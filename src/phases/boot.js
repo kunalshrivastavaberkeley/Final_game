@@ -1,5 +1,5 @@
 import { registerPhase, setState, GameState } from '../state.js'
-import { showTerminal, clearOutput, printLineAsync, showNameInput, hideNameInput, setTerminalColor, hideCursor } from '../terminal.js'
+import { showTerminal, printLineAsync, showNameInput, hideNameInput, setTerminalColor, hideCursor } from '../terminal.js'
 import { terminalGlow, monitorMesh } from '../scene.js'
 import { playLoop, setHumHandle } from '../audio.js'
 import { sleep } from '../utils.js'

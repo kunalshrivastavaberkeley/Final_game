@@ -8,18 +8,19 @@ const PLAYER_HALF = new THREE.Vector3(0.3, 0.9, 0.3)
 const PLAYER_Y = 1.65
 
 let controls = null
+let _camera  = null
 let enabled  = false
 
 const keys = { w: false, a: false, s: false, d: false }
 
-const _forward = new THREE.Vector3()
-const _right   = new THREE.Vector3()
-const _dir     = new THREE.Vector3()
-const _desiredPos = new THREE.Vector3()
-const _playerMin  = new THREE.Vector3()
-const _playerMax  = new THREE.Vector3()
+const _forward   = new THREE.Vector3()
+const _right     = new THREE.Vector3()
+const _dir       = new THREE.Vector3()
+const _playerMin = new THREE.Vector3()
+const _playerMax = new THREE.Vector3()
 
 export function initPlayer(camera, canvas) {
+  _camera = camera
   controls = new PointerLockControls(camera, canvas)
 
   controls.addEventListener('lock',   () => { enabled = true })
@@ -49,8 +50,8 @@ export function initPlayer(camera, canvas) {
 export function lockPointer()   { controls?.lock() }
 export function unlockPointer() { controls?.unlock() }
 
-export function isNearDesk()  { return controls && controls.camera.position.z < -4.5 }
-export function isNearShelf() { return controls && controls.camera.position.z > 5.5 }
+export function isNearDesk()  { return _camera && _camera.position.z < -4.5 }
+export function isNearShelf() { return _camera && _camera.position.z > 5.5 }
 
 export function updatePlayer(delta, camera) {
   if (!enabled || GameState.transitioning) return

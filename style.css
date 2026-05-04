@@ -110,6 +110,7 @@ canvas#c {
   margin-top: 0.4rem;
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
 }
 
 #terminal-input-row.visible {
