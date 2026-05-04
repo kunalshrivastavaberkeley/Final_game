@@ -5,7 +5,24 @@
       "Bash(Select-Object FullName)",
       "Bash(npm --version)",
       "Bash(npx vite *)",
-      "Bash(npm show *)"
+      "Bash(npm show *)",
+      "Bash(Copy-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\painted-worn-concrete-bl\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\painted-worn-concrete-bl\" -Recurse)",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\painted-worn-concrete-bl\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\painted-worn-concrete-bl\" -Recurse)",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\Poliigon_ConcreteWorn_8690\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\Poliigon_ConcreteWorn_8690\" -Recurse)",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\Poliigon_PlasterPainted_7664\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\Poliigon_PlasterPainted_7664\" -Recurse)",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\408058__vince2323__computer-fan-sound-1.wav\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\audio\\\\fan.wav\")",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\485953__aunrea__refrigerator-hum.wav\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\audio\\\\hum.wav\")",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\660863__drooler__chime-improper.flac\" \"c:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\audio\\\\chime.flac\")",
+      "Bash(Copy-Item \"C:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\image \\(17\\).png\" \"C:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\birthday.png\")",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\image \\(17\\).png\" \"C:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\\\\public\\\\birthday.png\")",
+      "Bash(gh auth *)",
+      "PowerShell(gh auth status 2>&1)",
+      "Bash(xargs ls *)",
+      "Bash(awk '{print $5, $9}')",
+      "PowerShell(winget list gh 2>&1)",
+      "PowerShell(winget install --id GitHub.cli --silent --accept-package-agreements --accept-source-agreements 2>&1)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"User\"\\); gh --version 2>&1)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"User\"\\); gh auth login --web --git-protocol https 2>&1)"
     ]
   }
 }
