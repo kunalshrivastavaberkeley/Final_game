@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\kunal\\\\OneDrive\\\\Desktop\\\\Final_game\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(npm --version)",
+      "Bash(npx vite *)",
+      "Bash(npm show *)"
+    ]
+  }
+}
